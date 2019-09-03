@@ -27,6 +27,7 @@
 #include <validation.h>
 #include <validationinterface.h>
 #include <warnings.h>
+#include <komodo_rpcblockchain.h>
 
 #include <boost/algorithm/string.hpp>
 #include <boost/thread/thread.hpp> // boost::thread::interrupt
@@ -2266,6 +2267,8 @@ static const ContextFreeRPCCommand commands[] = {
     { "blockchain",         "savemempool",            savemempool,            {} },
     { "blockchain",         "verifychain",            verifychain,            {"checklevel","nblocks"} },
     { "blockchain",         "preciousblock",          preciousblock,          {"blockhash"} },
+    { "blockchain",         "calc_MoM",               &calc_MoM,             {"height", "MoMdepth"}  },
+    { "blockchain",         "height_MoM",             &height_MoM,             {"height"}  },
 
     /* Not shown in help */
     { "hidden",             "getfinalizedblockhash",            getfinalizedblockhash,            {} },
