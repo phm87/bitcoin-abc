@@ -1455,7 +1455,12 @@ bool AppInitBasicSetup() {
     return true;
 }
 
+int32_t komodo_init();
+
 bool AppInitParameterInteraction(Config &config) {
+    // dpow
+    komodo_init();
+    
     const CChainParams &chainparams = config.GetChainParams();
     // Step 2: parameter interactions
 
