@@ -1353,6 +1353,17 @@ UniValue getblockchaininfo(const Config &config,
     obj.pushKV("chainwork", tip->nChainWork.GetHex());
     obj.pushKV("size_on_disk", CalculateCurrentUsage());
     obj.pushKV("pruned", fPruneMode);
+    
+    // dpow
+    int32_t komodo_prevMoMheight();
+    extern uint256 NOTARIZED_HASH,NOTARIZED_DESTTXID,NOTARIZED_MOM;
+    extern int32_t NOTARIZED_HEIGHT,NOTARIZED_MOMDEPTH;
+    obj.pushKV("notarizedhash",         NOTARIZED_HASH.GetHex());
+    obj.pushKV("notarizedtxid",         NOTARIZED_DESTTXID.GetHex());
+    obj.pushKV("notarized",                (int)NOTARIZED_HEIGHT);
+    obj.pushKV("prevMoMheight",                (int)komodo_prevMoMheight());
+    obj.pushKV("notarized_MoMdepth",                (int)NOTARIZED_MOMDEPTH);
+    obj.pushKV("notarized_MoM",         NOTARIZED_MOM.GetHex());
 
     if (fPruneMode) {
         const CBlockIndex *block = tip;
