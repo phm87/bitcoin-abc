@@ -56,7 +56,7 @@ int32_t komodo_MoM(int32_t *notarized_heightp,uint256 *MoMp,uint256 *kmdtxidp,in
     return(depth);
 }
 
-UniValue calc_MoM(const JSONRPCRequest& request)
+static UniValue calc_MoM(const Config &config, const JSONRPCRequest& request)
 {
     int32_t height,MoMdepth; uint256 MoM; UniValue ret(UniValue::VOBJ); UniValue a(UniValue::VARR);
     if ( request.params.size() != 2 )
@@ -75,7 +75,7 @@ UniValue calc_MoM(const JSONRPCRequest& request)
     return ret;
 }
 
-UniValue height_MoM(const JSONRPCRequest& request)
+static UniValue height_MoM(const Config &config, const JSONRPCRequest& request)
 {
     int32_t height,depth,notarized_height,MoMoMdepth,MoMoMoffset,kmdstarti,kmdendi; uint256 MoM,MoMoM,kmdtxid; uint32_t timestamp = 0; UniValue ret(UniValue::VOBJ); UniValue a(UniValue::VARR);
     if ( request.params.size() != 1 )
