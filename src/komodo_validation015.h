@@ -300,7 +300,7 @@ int32_t gettxout_scriptPubKey(int32_t height,uint8_t *scriptPubKey,int32_t maxsi
     {
         // Temporary woraround.
         const Config &GetConfig();
-        if ( GetTransaction(Getconfig(),txid,tx,hashBlock,false) == 0 )
+        if ( GetTransaction(GetConfig(),txid,tx,hashBlock,false) == 0 )
         {
             //fprintf(stderr,"ht.%d couldnt get txid.%s\n",height,txid.GetHex().c_str());
             return(-1);
@@ -308,7 +308,8 @@ int32_t gettxout_scriptPubKey(int32_t height,uint8_t *scriptPubKey,int32_t maxsi
     }
     else
     {
-        CWallet * const pwallet = vpwallets[0];
+        std::vector<CWallet *> wallets = GetWallets();
+        CWallet * const pwallet = wallets[0];
         if ( pwallet != 0 )
         {
             auto it = pwallet->mapWallet.find(txid);
