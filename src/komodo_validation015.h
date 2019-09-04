@@ -298,8 +298,6 @@ int32_t gettxout_scriptPubKey(int32_t height,uint8_t *scriptPubKey,int32_t maxsi
     LOCK(cs_main);
     if ( KOMODO_TXINDEX != 0 )
     {
-        // Temporary woraround.
-        const Config &GetConfig();
         if ( GetTransaction(GetConfig(),txid,tx,hashBlock,false) == 0 )
         {
             //fprintf(stderr,"ht.%d couldnt get txid.%s\n",height,txid.GetHex().c_str());
@@ -337,7 +335,7 @@ int32_t gettxout_scriptPubKey(int32_t height,uint8_t *scriptPubKey,int32_t maxsi
 
 int32_t komodo_importaddress(std::string addr)
 {
-    CTxDestination address; CWallet * const pwallet = vpwallets[0];
+    CTxDestination address; std::vector<CWallet *> wallets = GetWallets(); CWallet * const pwallet = wallets[0];
     if ( pwallet != 0 )
     {
         LOCK2(cs_main, pwallet->cs_wallet);
@@ -352,12 +350,12 @@ int32_t komodo_importaddress(std::string addr)
             }
             else
             {
-                printf("komodo_importaddress %s\n",EncodeDestination(address).c_str());
+                printf("komodo_importaddress %s\n",EncodeDestination(GetConfig(), address).c_str());
                 ImportAddress(pwallet, address, addr);
                 return(1);
             }
         }
-        printf("%s -> komodo_importaddress.(%s) failed valid.%d\n",addr.c_str(),EncodeDestination(address).c_str(),IsValidDestination(address));
+        printf("%s -> komodo_importaddress.(%s) failed valid.%d\n",addr.c_str(),EncodeDestination(GetConfig(), address).c_str(),IsValidDestination(address));
     }
     return(-1);
 }
@@ -807,7 +805,7 @@ bool Getscriptaddress(char *destaddr,const CScript &scriptPubKey)
     CTxDestination address;
     if ( ExtractDestination(scriptPubKey,address) != 0 )
     {
-        strcpy(destaddr,(char *)EncodeDestination(address).c_str());
+        strcpy(destaddr,(char *)EncodeDestination(GetConfig(), address).c_str());
         return(true);
     }
     //fprintf(stderr,"ExtractDestination failed\n");
