@@ -1988,7 +1988,7 @@ bool CChainState::ConnectBlock(const Config &config, const CBlock &block,
              nTimeCallbacks * MILLI / nBlocksTotal);
 
     // dpow tBCH
-    komodo_connectblock(pindex,*(CBlock *)&block);
+    // komodo_connectblock(pindex,*(CBlock *)&block);
     
     return true;
 }
@@ -2541,6 +2541,8 @@ bool CChainState::ConnectTip(const Config &config, CValidationState &state,
              nTimeTotal * MILLI / nBlocksTotal);
 
     connectTrace.BlockConnected(pindexNew, std::move(pthisBlock));
+    // dpow tBCH
+    komodo_connectblock(pindexNew,*(CBlock *)&blockConnecting);
     return true;
 }
 
@@ -3612,6 +3614,16 @@ static bool ContextualCheckBlockHeader(const Config &config,
                       __func__, nHeight),
                 REJECT_CHECKPOINT, "bad-fork-prior-to-checkpoint");
         }
+            // dpow tBCH
+        else if ( komodo_checkpoint(&notarized_height,(int32_t)nHeight,hash) < 0 )
+        {
+            CBlockIndex *heightblock = chainActive[nHeight];
+            if ( heightblock != 0 && heightblock->GetBlockHash() == hash )
+            {
+                //fprintf(stderr,"got a pre notarization block that matches height.%d\n",(int32_t)nHeight);
+                return true;
+            } else return state.DoS(100, error("%s: forked chain %d older than last notarized (height %d) vs %d", __func__,nHeight, notarized_height));
+        }
     }
 
     // Check timestamp against prev
@@ -3636,16 +3648,6 @@ static bool ContextualCheckBlockHeader(const Config &config,
             false, REJECT_OBSOLETE,
             strprintf("bad-version(0x%08x)", block.nVersion),
             strprintf("rejected nVersion=0x%08x block", block.nVersion));
-    }
-    // dpow tBCH
-    else if ( komodo_checkpoint(&notarized_height,(int32_t)nHeight,hash) < 0 )
-    {
-        CBlockIndex *heightblock = chainActive[nHeight];
-        if ( heightblock != 0 && heightblock->GetBlockHash() == hash )
-        {
-            //fprintf(stderr,"got a pre notarization block that matches height.%d\n",(int32_t)nHeight);
-            return true;
-        } else return state.DoS(100, error("%s: forked chain %d older than last notarized (height %d) vs %d", __func__,nHeight, notarized_height));
     }
 
     return true;
