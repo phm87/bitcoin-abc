@@ -292,13 +292,15 @@ struct rmd160_vstate { uint64_t length; uint8_t buf[64]; uint32_t curlen, state[
 int32_t KOMODO_TXINDEX = 1;
 void ImportAddress(CWallet*, const CTxDestination& dest, const std::string& strLabel);
 
-int32_t gettxout_scriptPubKey(int32_t height,uint8_t *scriptPubKey,int32_t maxsize,uint256 txid,int32_t n)
+int32_t gettxout_scriptPubKey(int32_t height,uint8_t *scriptPubKey,int32_t maxsize,const TxId txid,int32_t n)
 {
     static uint256 zero; int32_t i,m; uint8_t *ptr; CTransactionRef tx=0; uint256 hashBlock;
     LOCK(cs_main);
     if ( KOMODO_TXINDEX != 0 )
     {
-        if ( GetTransaction(Params().GetConsensus(),txid,tx,hashBlock,false) == 0 )
+        // Temporary woraround.
+        const Config &GetConfig();
+        if ( GetTransaction(Getconfig(),txid,tx,hashBlock,false) == 0 )
         {
             //fprintf(stderr,"ht.%d couldnt get txid.%s\n",height,txid.GetHex().c_str());
             return(-1);
