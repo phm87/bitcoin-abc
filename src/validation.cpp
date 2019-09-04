@@ -249,7 +249,8 @@ const std::string strMessageMagic = "Bitcoin Signed Message:\n";
 namespace {
 CBlockIndex *&pindexBestInvalid = g_chainstate.pindexBestInvalid;
 CBlockIndex *&pindexBestParked = g_chainstate.pindexBestParked;
-
+char ASSETCHAINS_SYMBOL[65] = { "tBCH" };
+    
 /**
  * The best finalized block.
  * This block cannot be reorged in any way, shape or form.
