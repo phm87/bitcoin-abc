@@ -69,7 +69,7 @@
 #define KOMODO_ELECTION_GAP 2000
 #define KOMODO_ASSETCHAIN_MAXLEN 65
 
-#include <wallet/rpcdump.cpp>
+//#include <wallet/rpcdump.cpp>
 
 // KMD Notary Seasons 
 // 1: ENDS: May 1st 2018 1530921600
