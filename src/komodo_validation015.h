@@ -1152,6 +1152,8 @@ void komodo_notarized_update(int32_t nHeight,int32_t notarized_height,uint256 no
     portable_mutex_unlock(&komodo_mutex);
 }
 
+char ASSETCHAINS_SYMBOL[65] = { "tBCH" };
+
 int32_t komodo_checkpoint(int32_t *notarized_heightp,int32_t nHeight,uint256 hash)
 {
     int32_t notarized_height; uint256 zero,notarized_hash,notarized_desttxid; CBlockIndex *notary; CBlockIndex *pindex;
