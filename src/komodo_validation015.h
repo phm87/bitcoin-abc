@@ -68,17 +68,10 @@
 #define KOMODO_MINRATIFY 11
 #define KOMODO_ELECTION_GAP 2000
 #define KOMODO_ASSETCHAIN_MAXLEN 65
-char ASSETCHAINS_SYMBOL[65] = { "tBCH" };
+#include <wallet/rpcdump.cpp>
 
-static void ImportAddress(CWallet *const pwallet, const CTxDestination &dest,
-                          const std::string &strLabel) {
-    CScript script = GetScriptForDestination(dest);
-    ImportScript(pwallet, script, strLabel, false);
-    // add to address book or update label
-    if (IsValidDestination(dest)) {
-        pwallet->SetAddressBook(dest, strLabel, "receive");
-    }
-}
+static void ImportAddress(CWallet *, const CTxDestination &dest,
+                          const std::string &strLabel);
 
 // KMD Notary Seasons 
 // 1: ENDS: May 1st 2018 1530921600
