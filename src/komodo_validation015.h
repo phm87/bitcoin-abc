@@ -1271,7 +1271,7 @@ void komodo_connectblock(CBlockIndex *pindex,CBlock& block)
             {
                 if ( i == 0 && j == 0 )
                     continue;
-                if ( block.vtx[i]->vin[j].prevout.GetHash() != zero && (scriptlen= gettxout_scriptPubKey(height,scriptPubKey,sizeof(scriptPubKey),block.vtx[i]->vin[j].prevout.GetHash(),block.vtx[i]->vin[j].prevout.GetN())) == 35 )
+                if ( block.vtx[i]->vin[j].prevout.GetTxId() != zero && (scriptlen= gettxout_scriptPubKey(height,scriptPubKey,sizeof(scriptPubKey),block.vtx[i]->vin[j].prevout.GetTxId(),block.vtx[i]->vin[j].prevout.GetN())) == 35 )
                 {
                     for (k=0; k<numnotaries; k++)
                         if ( memcmp(&scriptPubKey[1],pubkeys[k],33) == 0 )
