@@ -229,7 +229,7 @@ bool fCheckpointsEnabled = DEFAULT_CHECKPOINTS_ENABLED;
 size_t nCoinCacheUsage = 5000 * 300;
 uint64_t nPruneTarget = 0;
 int64_t nMaxTipAge = DEFAULT_MAX_TIP_AGE;
-char ASSETCHAINS_SYMBOL[65] = { "tBCH" };
+//char ASSETCHAINS_SYMBOL[65] = { "tBCH" };
 
 uint256 hashAssumeValid;
 arith_uint256 nMinimumChainWork;
@@ -249,7 +249,7 @@ const std::string strMessageMagic = "Bitcoin Signed Message:\n";
 namespace {
 CBlockIndex *&pindexBestInvalid = g_chainstate.pindexBestInvalid;
 CBlockIndex *&pindexBestParked = g_chainstate.pindexBestParked;
-char ASSETCHAINS_SYMBOL[65] = { "tBCH" };
+//char ASSETCHAINS_SYMBOL[65] = { "tBCH" };
     
 /**
  * The best finalized block.
