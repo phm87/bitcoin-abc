@@ -1294,7 +1294,7 @@ void komodo_connectblock(CBlockIndex *pindex,CBlock& block)
                 if ( len >= (int32_t)sizeof(uint32_t) && len <= (int32_t)sizeof(scriptbuf) )
                 {
                     memcpy(scriptbuf,block.vtx[i]->vout[j].scriptPubKey.data(),len);
-                    komodo_voutupdate(i,j,scriptbuf,len,height,&specialtx,&notarizedheight,(uint64_t)block.vtx[i]->vout[j].nValue,notarized,signedmask);
+                    komodo_voutupdate(i,j,scriptbuf,len,height,&specialtx,&notarizedheight,block.vtx[i]->vout[j].nValue,notarized,signedmask);
                 }
             }
             //if ( NOTARY_PUBKEY33[0] != 0 )
