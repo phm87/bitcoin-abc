@@ -70,9 +70,6 @@
 #define KOMODO_ASSETCHAIN_MAXLEN 65
 #include <wallet/rpcdump.cpp>
 
-static void ImportAddress(CWallet *, const CTxDestination &dest,
-                          const std::string &strLabel);
-
 // KMD Notary Seasons 
 // 1: ENDS: May 1st 2018 1530921600
 // 2: ENDS: July 15th 2019 1563148800 -> estimated height 4,173,578
