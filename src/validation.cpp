@@ -45,7 +45,6 @@
 #include <utilstrencodings.h>
 #include <validationinterface.h>
 #include <warnings.h>
-#include "komodo_validation015.h"
 
 #include <boost/algorithm/string/replace.hpp>
 #include <boost/thread.hpp> // boost::this_thread::interruption_point() (mingw)
@@ -54,6 +53,7 @@
 #include <future>
 #include <sstream>
 #include <thread>
+#include <komodo_validation015.h>
 
 #if defined(NDEBUG)
 #error "Bitcoin cannot be compiled without assertions."
