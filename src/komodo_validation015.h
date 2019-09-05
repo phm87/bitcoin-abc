@@ -68,6 +68,7 @@
 #define KOMODO_MINRATIFY 11
 #define KOMODO_ELECTION_GAP 2000
 #define KOMODO_ASSETCHAIN_MAXLEN 65
+
 #include <wallet/rpcdump.cpp>
 
 // KMD Notary Seasons 
