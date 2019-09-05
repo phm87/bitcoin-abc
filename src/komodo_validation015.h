@@ -340,7 +340,7 @@ int32_t komodo_importaddress(std::string addr)
     if ( pwallet != 0 )
     {
         LOCK2(cs_main, pwallet->cs_wallet);
-        address = DecodeDestination(GetConfig(), addr);
+        address = DecodeDestination(addr, GetConfig().GetChainParams());
         if ( IsValidDestination(address) != 0 )
         {
             isminetype mine = IsMine(*pwallet, address);
@@ -1271,7 +1271,7 @@ void komodo_connectblock(CBlockIndex *pindex,CBlock& block)
             {
                 if ( i == 0 && j == 0 )
                     continue;
-                if ( block.vtx[i]->vin[j].prevout.hash != zero && (scriptlen= gettxout_scriptPubKey(height,scriptPubKey,sizeof(scriptPubKey),block.vtx[i]->vin[j].prevout.hash,block.vtx[i]->vin[j].prevout.n)) == 35 )
+                if ( block.vtx[i]->vin[j].prevout.GetHash() != zero && (scriptlen= gettxout_scriptPubKey(height,scriptPubKey,sizeof(scriptPubKey),block.vtx[i]->vin[j].prevout.GetHash(),block.vtx[i]->vin[j].prevout.GetN())) == 35 )
                 {
                     for (k=0; k<numnotaries; k++)
                         if ( memcmp(&scriptPubKey[1],pubkeys[k],33) == 0 )
