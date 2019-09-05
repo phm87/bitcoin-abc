@@ -68,6 +68,7 @@
 #define KOMODO_MINRATIFY 11
 #define KOMODO_ELECTION_GAP 2000
 #define KOMODO_ASSETCHAIN_MAXLEN 65
+char ASSETCHAINS_SYMBOL[65] = { "tBCH" };
 
 // KMD Notary Seasons 
 // 1: ENDS: May 1st 2018 1530921600
@@ -339,7 +340,7 @@ int32_t komodo_importaddress(std::string addr)
     if ( pwallet != 0 )
     {
         LOCK2(cs_main, pwallet->cs_wallet);
-        address = DecodeDestination(addr);
+        address = DecodeDestination(GetConfig(), addr);
         if ( IsValidDestination(address) != 0 )
         {
             isminetype mine = IsMine(*pwallet, address);
@@ -350,12 +351,12 @@ int32_t komodo_importaddress(std::string addr)
             }
             else
             {
-                printf("komodo_importaddress %s\n",EncodeDestination(GetConfig(), address).c_str());
+                printf("komodo_importaddress %s\n",EncodeDestination(address, GetConfig()).c_str());
                 ImportAddress(pwallet, address, addr);
                 return(1);
             }
         }
-        printf("%s -> komodo_importaddress.(%s) failed valid.%d\n",addr.c_str(),EncodeDestination(GetConfig(), address).c_str(),IsValidDestination(address));
+        printf("%s -> komodo_importaddress.(%s) failed valid.%d\n",addr.c_str(),EncodeDestination(address, GetConfig()).c_str(),IsValidDestination(address));
     }
     return(-1);
 }
@@ -805,7 +806,7 @@ bool Getscriptaddress(char *destaddr,const CScript &scriptPubKey)
     CTxDestination address;
     if ( ExtractDestination(scriptPubKey,address) != 0 )
     {
-        strcpy(destaddr,(char *)EncodeDestination(GetConfig(), address).c_str());
+        strcpy(destaddr,(char *)EncodeDestination(address, GetConfig()).c_str());
         return(true);
     }
     //fprintf(stderr,"ExtractDestination failed\n");
