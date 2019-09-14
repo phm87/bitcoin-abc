@@ -219,6 +219,10 @@ static const char *notaries_elected[NUM_KMD_SEASONS][NUM_KMD_NOTARIES][2] =
         {"xrobesx_NA", "03f0cc6d142d14a40937f12dbd99dbd9021328f45759e26f1877f2a838876709e1" },
     },
     {
+        {"metaphilibert", "0275451a35b50b27bfa4935fe5af2015ac8a95f748036fa2c4db547565f105e5c2" },
+        {"phm87_SH", "03ad4e1317c982f11f05f41a6aacb244f28612dd792deefa68db740c0084588d49" },
+        {"phm87_EU", "02d8e32a6e677f862ea6d52006ab8fc2a72c96b7d7eff4921db1c58714a2339dbe" },
+        /*
         {"madmax_NA", "02ef81a360411adf71184ff04d0c5793fc41fd1d7155a28dd909f21f35f4883ac1" },
         {"alright_AR", "036a6bca1c2a8166f79fa8a979662892742346cc972b432f8e61950a358d705517" },
         {"strob_NA", "02049202f3872877e81035549f6f3a0f868d0ad1c9b0e0d2b48b1f30324255d26d" },
@@ -283,6 +287,7 @@ static const char *notaries_elected[NUM_KMD_SEASONS][NUM_KMD_NOTARIES][2] =
         {"gt_AR", "0307c1cf89bd8ed4db1b09a0a98cf5f746fc77df3803ecc8611cf9455ec0ce6960" },
         {"patchkez_SH", "03d7c187689bf829ca076a30bbf36d2e67bb74e16a3290d8a55df21d6cb15c80c1" },
         {"decker_AR", "02a85540db8d41c7e60bf0d33d1364b4151cad883dd032878ea4c037f67b769635" },
+        */
     }
 };
 
